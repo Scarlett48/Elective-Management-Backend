@@ -5,6 +5,7 @@ var app = express();
 
 const mysqlConnection = require('./database');
 const addElective = require('./routes/Electives');
+const deleteElective = require('./routes/Electives');
 const login = require('./routes/Users');
 const register = require('./routes/Users');
 
@@ -15,5 +16,6 @@ app.use(cors());
 app.post("/Register",register);
 app.post("/Login",login);
 app.post("/addElectives",addElective);
+app.post("/deleteElectives",deleteElective);
 
 app.listen(3000);
