@@ -6,45 +6,34 @@ router.post("/addElectives",(req,res)=>{
   var count = Object.keys(req.body).length;
   var department,sem,course_code,course;
 
-  for (var i=0; i<count; i++){
-    console.log("------------------------------------"+i);
-    department = req.body[i].department;
-    console.log(department);
-    sem = req.body[i].sem;
-    console.log(sem);
-    course_code = req.body[i].course_code;
-    console.log(course_code);
-    course = req.body[i].course;
-    console.log(course);
-    
-    mysqlConnection.query("SELECT * FROM electives WHERE course_code = \""+course_code+"\"",(err,result)=>{
-        if(!err){
-            if(result.length>0){
-                res.send("COURSE ALREADY EXISTS");
-            }
-            else{
-                mysqlConnection.query("INSERT INTO electives VALUES (\""+department+"\","+sem+",\""+course_code+"\",\""+course+"\")", (err,result)=>{
-                  console.log("INSERT INTO electives VALUES (\""+department+"\","+sem+",\""+course_code+"\",\""+course+"\")");
-                    if(!err){
-                      
-                      console.log("Inserted Data Successfully");
-                    }
-                    else{
-                        console.log(err)
-                    }
-                });
-            }
+  var arr =[]
+  for(var i=0; i<count; i++){
+    arr.push([req.body[i].department,req.body[i].sem,req.body[i].course_code,req.body[i].course]);
+  }
+  mysqlConnection.query("SELECT * FROM electives WHERE course_code = \""+course_code+"\"",(err,result)=>{
+    if(!err){
+        if(result.length>0){
+            res.send("COURSE ALREADY EXISTS");
         }
         else{
-            console.log(err);
+            mysqlConnection.query("INSERT INTO electives(department,semester,course_code,course_name) VALUES ?",[arr], (err,result)=>{
+              
+                if(!err){
+                  res.send(true);
+                  console.log("Inserted Data Successfully");
+                }
+                else{
+                  res.send(false);
+                  console.log(err)
+                }
+            });
         }
-    });
-  }
-
+    }
+    else{
+        console.log(err);
+    }
 });
 
-router.post("/showElectives",(req,res)=>{
-    
 });
 
 router.post("/deleteElectives",(req,res)=>{
