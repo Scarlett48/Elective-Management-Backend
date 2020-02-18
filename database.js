@@ -19,6 +19,11 @@ mysqlConnection.connect((err)=>{
             if(err)
             console.log(err);
         });
+
+        mysqlConnection.query("CREATE TABLE IF NOT EXISTS preferencelist (rollno VARCHAR(30) PRIMARY KEY, course_code_pref1 VARCHAR(255), course_code_pref2 VARCHAR(255), course_code_pref3 VARCHAR(255))",(err,result,fields)=>{
+            if(err)
+            console.log(err);
+        });
     }
     else{
         console.log(err);

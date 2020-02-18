@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mysqlConnection = require("../database");
 
+
 router.post("/Register",(req,res)=>{
     var name = req.body.name;
     var rollno = req.body.rollno;
@@ -31,13 +32,39 @@ router.post("/Login",(req,res)=>{
         if(!err){
             if(result.length>0){
                 if(pass==result.password && pass!=undefined){
-                    console.log(pass==result[0].password);
+                    mysqlConnection.query("INSERT INTO currentuser VALUES (\""+result[0].name+"\",\""+result[0].rollno+"\",\""+result[0].pass+"\",\""+result[0].sec+"\","+result[0].sem+")",(err,result)=>{
+                        if(err)
+                        console.log("Can't save user details!");
+                    });
                     res.send(true);       //LOGIN SUCCESSFUL
                 }
                 else{
                     res.send(false);      //WRONG PASSWORD
                 }
             }
+            else{
+                res.send("NO SUCH ROLL NUMBER EXISTS");
+            }
+        }
+        else{
+            console.log(err);
+        }
+    });
+});
+
+router.post("/deleteUser",(req,res)=>{
+    var rollno = req.body.rollno;
+
+    mysqlConnection.query("SELECT * FROM students WHERE rollno = \'"+rollno+"\'",(err,result)=>{
+        if(!err){
+            if(result.length>0){
+                mysqlConnection.query("DELETE FROM students WHERE rollno = \'"+rollno+"\'",(err,result)=>{
+                        if(err)
+                        console.log(err);
+                    });
+                    res.send(true);       //LOGIN SUCCESSFUL
+                }
+            
             else{
                 res.send("NO SUCH ROLL NUMBER EXISTS");
             }
