@@ -83,7 +83,7 @@ router.post("/viewElectives", (req, res) => {
     var department = req.body.department;
     var sem = req.body.sem;
     
-    mysqlConnection.query("SELECT * FROM electives WHERE department = \""+department+"\" AND sem = "+sem, (err, result) => {
+    mysqlConnection.query("SELECT * FROM electives WHERE department = \""+department+"\" AND semester = "+sem, (err, result) => {
       if (!err) {
         if (result.length > 0) {
           res.send(result);
