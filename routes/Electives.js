@@ -3,19 +3,14 @@ const router = express.Router();
 const mysqlConnection = require("../database");
 
 router.post("/addElectives",(req,res)=>{
-  var count = Object.keys(req.body).length;
-  var department,sem,course_code,course;
+  var count = Object.keys(req.body.data.data).length;
 
   var arr =[]
-  for(var i=0; i<count; i++){
-    arr.push([req.body[i].department,req.body[i].sem,req.body[i].course_code,req.body[i].course]);
+  for(var i=0; i<count-1; i++){
+    arr.push([req.body.data.data[i].department,req.body.data.data[i].sem,req.body.data.data[i].course_code,req.body.data.data[i].course]);
+    
   }
-  mysqlConnection.query("SELECT * FROM electives WHERE course_code = \""+course_code+"\"",(err,result)=>{
-    if(!err){
-        if(result.length>0){
-            res.send("COURSE ALREADY EXISTS");
-        }
-        else{
+  
             mysqlConnection.query("INSERT INTO electives(department,semester,course_code,course_name) VALUES ?",[arr], (err,result)=>{
               
                 if(!err){
@@ -26,12 +21,6 @@ router.post("/addElectives",(req,res)=>{
                   res.send(false);
                   console.log(err)
                 }
-            });
-        }
-    }
-    else{
-        console.log(err);
-    }
 });
 
 });

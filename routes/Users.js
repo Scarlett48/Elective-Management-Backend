@@ -31,11 +31,7 @@ router.post("/Login",(req,res)=>{
     mysqlConnection.query("SELECT * FROM students WHERE rollno = \'"+rollno+"\'",(err,result)=>{
         if(!err){
             if(result.length>0){
-                if(pass==result.password && pass!=undefined){
-                    mysqlConnection.query("INSERT INTO currentuser VALUES (\""+result[0].name+"\",\""+result[0].rollno+"\",\""+result[0].pass+"\",\""+result[0].sec+"\","+result[0].sem+")",(err,result)=>{
-                        if(err)
-                        console.log("Can't save user details!");
-                    });
+                if(pass==result[0].password) {
                     res.send(true);       //LOGIN SUCCESSFUL
                 }
                 else{

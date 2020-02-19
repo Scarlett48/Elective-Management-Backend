@@ -26,4 +26,4 @@ app.post("/deleteElectives",deleteElective);
 app.post("/student/viewElectives",studentviewElectives);
 app.post("/chooseElectivePreference",chooseElectivePreference);
 
-app.listen(3000);
+app.listen(3001);
