@@ -12,6 +12,7 @@ const login = require('./routes/Users');
 const deleteUser = require('./routes/Users');
 const register = require('./routes/Users');
 const chooseElectivePreference = require('./routes/PreferenceList');
+const editPass = require('./routes/Users');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -25,5 +26,6 @@ app.post("/addElectives",addElective);
 app.post("/deleteElectives",deleteElective);
 app.post("/student/viewElectives",studentviewElectives);
 app.post("/chooseElectivePreference",chooseElectivePreference);
+app.post("/editPassword",editPass);
 
 app.listen(3001);

@@ -32,7 +32,7 @@ router.post("/Login",(req,res)=>{
         if(!err){
             if(result.length>0){
                 if(pass==result[0].password) {
-                    res.send(true);       //LOGIN SUCCESSFUL
+                    res.send(true);
                 }
                 else{
                     res.send(false);      //WRONG PASSWORD
@@ -69,6 +69,48 @@ router.post("/deleteUser",(req,res)=>{
             console.log(err);
         }
     });
+});
+
+router.post("/editPassword", (req, res)=>{
+    
+    var rollno = req.body.rollno;
+    var oldpass = req.body.oldPass;
+    var newPass = req.body.newPass;
+
+    mysqlConnection.query("SELECT password FROM students WHERE rollno = \'"+rollno+"\'",(err,result)=>{
+        if(!err){
+            if(result.length>0){
+                if( oldpass == result[0].password ) {
+                    res.send("Password authenticated");       //LOGIN SUCCESSFUL
+
+                    mysqlConnection.query("UPDATE students SET password = \'"+newPass+"\' WHERE rollno = \'"+rollno+"\'",(err,result)=>{
+                        if(!err){
+                            res.send("Password updated successfully");
+                        }
+                        else{
+                            res.send("Error while updating successfully");
+                        }
+
+                    });    
+
+
+                }
+                else{
+                    res.send("Wrong password");      //WRONG PASSWORD
+                }
+            }
+            
+            else{
+                res.send("Invalid rollnumber");
+            }
+        }
+        else{
+            console.log(err);
+        }
+    });
+    
+    
+    
 });
 
 module.exports = router;
