@@ -8,10 +8,8 @@ router.post("/chooseElectivePreference",(req,res)=>{
     var elec2 = req.body.elec2;
     var elec3 = req.body.elec3;
 
-
-
-    // mysqlConnection.query("INSERT INTO preferencelist VALUES (\"cse123\", \"cse234\", \"cse345\", \"cse456\")", (err,result)=>{
-    mysqlConnection.query("INSERT INTO preferencelist VALUES (\""+rollno+"\",\""+elec1+"\",\""+elec2+"\",\""+elec3+")", (err,result)=>{
+    
+    mysqlConnection.query("INSERT INTO preferencelist(rollno,course_code_pref1,course_code_pref2,course_code_pref3) VALUES (\""+rollno+"\",\""+elec1+"\",\""+elec2+"\",\""+elec3+"\")", (err,result)=>{
         if(!err){
             res.send(true);
             console.log("Preference submitted Successfully");

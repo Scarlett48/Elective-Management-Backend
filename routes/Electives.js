@@ -11,16 +11,31 @@ router.post("/addElectives",(req,res)=>{
     
   }
   
-            mysqlConnection.query("INSERT INTO electives(department,semester,course_code,course_name) VALUES ?",[arr], (err,result)=>{
+  mysqlConnection.query("INSERT INTO electives(department,semester,course_code,course_name) VALUES ?",[arr], (err,result)=>{
               
-                if(!err){
-                  res.send(true);
-                  console.log("Inserted Data Successfully");
-                }
-                else{
-                  res.send(false);
-                  console.log(err)
-                }
+    if(!err){
+      res.send(true);
+        console.log("Inserted Data Successfully");
+          }
+    else{
+      res.send(false);
+      console.log(err)
+          }
+});
+
+});
+
+router.post("/addOneElective",(req,res)=>{
+  mysqlConnection.query("INSERT INTO electives VALUES (\""+req.body.department+"\",\""+req.body.sem+"\",\""+req.body.course_code+"\",\""+req.body.course+"\")", (err,result)=>{
+              
+    if(!err){
+      res.send(true);
+        console.log("INSERTED DATA SUCCESSFULLY");
+          }
+    else{
+      res.send(false);
+      console.log(err)
+          }
 });
 
 });

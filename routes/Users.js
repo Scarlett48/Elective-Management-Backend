@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mysqlConnection = require("../database");
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 router.post("/Register",(req,res)=>{
     var name = req.body.name;
@@ -10,18 +11,19 @@ router.post("/Register",(req,res)=>{
     var sec = req.body.sec;
     var sem = req.body.sem;
 
-    mysqlConnection.query("INSERT INTO students VALUES (\""+name+"\",\""+rollno+"\",\""+pass+"\",\""+sec+"\","+sem+")", (err,result)=>{
-        if(!err){
-            res.send(true);
-            console.log("Created user login Successfully");
-        }
-        else{
-            res.send(false);
-            console.log("Failed to create user login");
-            console.log(err);
-        }
+    bcrypt.hash(pass, saltRounds, function(err, hash) {
+        mysqlConnection.query("INSERT INTO students VALUES (\""+name+"\",\""+rollno+"\",\""+hash+"\",\""+sec+"\","+sem+")", (err,result)=>{
+            if(!err){
+                res.send(true);
+                console.log("Created user login Successfully");
+            }
+            else{
+                res.send("USER ALREADY EXISTS");
+                console.log("Failed to create user login");
+                console.log(err);
+            }
+        });
     });
-
 });
 
 router.post("/Login",(req,res)=>{
@@ -29,14 +31,17 @@ router.post("/Login",(req,res)=>{
     var pass = req.body.pass;
 
     mysqlConnection.query("SELECT * FROM students WHERE rollno = \'"+rollno+"\'",(err,result)=>{
+        var detail= result;
         if(!err){
             if(result.length>0){
-                if(pass==result[0].password) {
-                    res.send(true);
+                bcrypt.compare(pass, detail[0].password, function(err, result) {
+                if(result==true) {
+                    res.send(detail[0]);
                 }
                 else{
-                    res.send(false);      //WRONG PASSWORD
+                    res.send("WRONG PASSWORD");      //WRONG PASSWORD
                 }
+            });
             }
             else{
                 res.send("NO SUCH ROLL NUMBER EXISTS");
@@ -74,34 +79,34 @@ router.post("/deleteUser",(req,res)=>{
 router.post("/editPassword", (req, res)=>{
     
     var rollno = req.body.rollno;
-    var oldpass = req.body.oldPass;
+    var oldPass = req.body.oldPass;
     var newPass = req.body.newPass;
 
     mysqlConnection.query("SELECT password FROM students WHERE rollno = \'"+rollno+"\'",(err,result)=>{
         if(!err){
             if(result.length>0){
-                if( oldpass == result[0].password ) {
-                    res.send("Password authenticated");       //LOGIN SUCCESSFUL
-
-                    mysqlConnection.query("UPDATE students SET password = \'"+newPass+"\' WHERE rollno = \'"+rollno+"\'",(err,result)=>{
+                bcrypt.compare(oldPass, result[0].password, function(err, result) {
+                if( result==true ) {
+                    bcrypt.hash(newPass, saltRounds, function(err, hash) {
+                    mysqlConnection.query("UPDATE students SET password = \'"+hash+"\' WHERE rollno = \'"+rollno+"\'",(err,result)=>{
                         if(!err){
-                            res.send("Password updated successfully");
+                            res.send("PASSWORD UPDATED SUCCESSFULLY");
                         }
                         else{
-                            res.send("Error while updating successfully");
+                            res.send("ERROR WHILE UPDATING PASSWORD");
                         }
 
-                    });    
-
-
+                    });  
+                });  
                 }
                 else{
-                    res.send("Wrong password");      //WRONG PASSWORD
+                    res.send("WRONG PASSWORD");      //WRONG PASSWORD
                 }
+            });
             }
             
             else{
-                res.send("Invalid rollnumber");
+                res.send("USERNAME DOESN'T EXIST");
             }
         }
         else{

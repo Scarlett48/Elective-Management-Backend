@@ -5,6 +5,7 @@ var app = express();
 
 const mysqlConnection = require('./database');
 const addElective = require('./routes/Electives');
+const addOneElective = require('./routes/Electives');
 const viewElectives = require('./routes/Electives');
 const deleteElective = require('./routes/Electives');
 const studentviewElectives = require('./routes/Electives');
@@ -23,6 +24,7 @@ app.post("/Login",login);
 app.post("/deleteUser",deleteUser);
 app.post("/viewElectives",viewElectives);
 app.post("/addElectives",addElective);
+app.post("/addOneElective", addOneElective);
 app.post("/deleteElectives",deleteElective);
 app.post("/student/viewElectives",studentviewElectives);
 app.post("/chooseElectivePreference",chooseElectivePreference);
