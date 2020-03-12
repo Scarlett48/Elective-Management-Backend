@@ -7,11 +7,11 @@ router.post("/addElectives",(req,res)=>{
 
   var arr =[]
   for(var i=0; i<count-1; i++){
-    arr.push([req.body.data.data[i].department,req.body.data.data[i].sem,req.body.data.data[i].course_code,req.body.data.data[i].course]);
+    arr.push([req.body.data.data[i].department,req.body.data.data[i].sem,req.body.data.data[i].course_code, req.body.data.data[i].course, req.body.data.data[i].capacity]);
     
   }
   
-  mysqlConnection.query("INSERT INTO electives(department,semester,course_code,course_name) VALUES ?",[arr], (err,result)=>{
+  mysqlConnection.query("INSERT INTO electives(department,semester,course_code,course_name, capacity) VALUES ?",[arr], (err,result)=>{
               
     if(!err){
       res.send(true);
