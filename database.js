@@ -24,6 +24,11 @@ mysqlConnection.connect((err)=>{
             if(err)
             console.log(err);
         });
+
+        mysqlConnection.query("CREATE TABLE IF NOT EXISTS allotment (rollno VARCHAR(30) PRIMARY KEY, course_code VARCHAR(255))",(err, result, fields)=>{
+            if(err){
+                console.log(err);}
+        });
     }
     else{
         console.log(err);
