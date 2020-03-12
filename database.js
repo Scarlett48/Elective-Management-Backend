@@ -10,7 +10,7 @@ var mysqlConnection = mysql.createConnection({
 mysqlConnection.connect((err)=>{
     if(!err){
         console.log("Connected to database");
-        mysqlConnection.query("CREATE TABLE IF NOT EXISTS electives (department VARCHAR(25) NOT NULL, semester int NOT NULL, course_code VARCHAR(255), course_name VARCHAR(255) NOT NULL)",(err,result,fields)=>{
+        mysqlConnection.query("CREATE TABLE IF NOT EXISTS electives (department VARCHAR(25) NOT NULL, semester int NOT NULL, course_code VARCHAR(255), course_name VARCHAR(255) NOT NULL, capacity int NOT NULL)",(err,result,fields)=>{
             if(err)
             console.log(err);
         });
