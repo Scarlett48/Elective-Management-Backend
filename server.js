@@ -31,3 +31,5 @@ app.post("/chooseElectivePreference",chooseElectivePreference);
 app.post("/editPassword",editPass);
 
 app.listen(3001);
+
+module.exports = app;
