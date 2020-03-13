@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "NODE_ENV=test jest --testPathPattern='./tests/.*\\.test\\.js$' --detectOpenHandles --runInBand --forceExit"
+    "test": "mocha --recursive --exit"
   },
   "author": "",
   "license": "ISC",
