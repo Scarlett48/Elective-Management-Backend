@@ -1,6 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-var cors = require('cors');
+const bodyParser = require('body-parser');  
+var cors = require('cors');  //to allow both client and server to exist in the same system
 var app = express();
 
 const mysqlConnection = require('./database');
@@ -15,6 +15,7 @@ const register = require('./routes/Users');
 const chooseElectivePreference = require('./routes/PreferenceList');
 const changeElectivePreference = require('./routes/PreferenceList');
 const editPass = require('./routes/Users');
+const report = require('./routes/ReportGenerator');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -31,6 +32,7 @@ app.post("/deleteElectives",deleteElective);
 app.post("/chooseElectivePreference",chooseElectivePreference);
 app.post("/changeElectivePreference",changeElectivePreference)
 app.post("/editPassword",editPass);
+app.get("/generatePDF", report);
 
 app.listen(3001);
 

@@ -16,7 +16,7 @@ describe('POST /Login', ()=>{
             expect(res.body).to.contain.property("semester");
             done();
         })
-        .catch((err) => done(err));
+        .catch(done);
     });
 
     it('WRONG PASSWORD returned when incorrect password is provided', (done)=>{
@@ -26,7 +26,7 @@ describe('POST /Login', ()=>{
             expect(res.text).to.contain("WRONG PASSWORD");
             done();
         })
-        .catch((err) => done(err));
+        .catch(done);
     });
 
     it('NO SUCH ROLL NUMBER EXISTS returned when incorrect username is provided', (done)=>{
@@ -36,7 +36,7 @@ describe('POST /Login', ()=>{
             expect(res.text).to.contain("NO SUCH ROLL NUMBER EXISTS");
             done();
         })
-        .catch((err) => done(err));
+        .catch(done);
     });
 
 });
@@ -49,7 +49,7 @@ describe('POST /Register', ()=>{
             expect(res.text).to.contain("USER ALREADY EXISTS");
             done();
         })
-        .catch((err) => done(err));
+        .catch(done);
     });
 });
 
@@ -61,7 +61,7 @@ describe('POST /deleteUser', ()=>{
             expect(res.text).to.contain('NO SUCH ROLL NUMBER EXISTS');
             done();
         })
-        .catch((err)=> done(err));
+        .catch(done);
     });
 });
 
@@ -70,10 +70,9 @@ describe('POST /editPassword', ()=>{
         request(app).post('/editPassword')
         .send({rollno:'cse17211', oldPass:'rip123', newPass:'QWERTY1234'})
         .then((res)=>{
-            console.log(res.text);
             expect(res.text).to.contain('WRONG PASSWORD');
             done();
         })
-        .catch((err)=> done(err));
+        .catch(done);
     });
 })

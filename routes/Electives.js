@@ -19,7 +19,7 @@ router.post("/addElectives",(req,res)=>{
           }
     else{
       res.send(false);
-      console.log(err)
+      // console.log(err);
           }
 });
 
@@ -34,7 +34,7 @@ router.post("/addOneElective",(req,res)=>{
           }
     else{
       res.send(false);
-      console.log(err)
+      // console.log(err);
           }
 });
 
@@ -52,7 +52,7 @@ router.post("/deleteElectives",(req,res)=>{
                     }
                     else{
                         res.send(false);
-                        console.log(err);
+                        // console.log(err);
                     }
                 });
             }
@@ -62,7 +62,7 @@ router.post("/deleteElectives",(req,res)=>{
         }
         else{
             res.send(false);
-            console.log(err);
+            // console.log(err);
         }
     });
 
@@ -78,7 +78,7 @@ router.post("/viewElectives", (req, res) => {
         }
       } else {
         res.send(false);
-        console.log(err);
+        // console.log(err);
       }
     });
   });
@@ -87,18 +87,23 @@ router.post("/viewElectives", (req, res) => {
     var department = req.body.department;
     var sem = req.body.sem;
     
-    mysqlConnection.query("SELECT * FROM electives WHERE department = \""+department+"\" AND semester = "+sem, (err, result) => {
-      if (!err) {
-        if (result.length > 0) {
-          res.send(result);
+    if(sem<8){
+      mysqlConnection.query("SELECT * FROM electives WHERE department = \""+department+"\" AND semester = "+(sem+1), (err, result) => {
+        if (!err) {
+          if (result.length > 0) {
+            res.send(result);
+          } else {
+            res.send("NO COURSE EXISTS");
+          }
         } else {
-          res.send("NO COURSE EXISTS");
+          res.send(false);
+          // console.log(err);
         }
-      } else {
-        res.send(false);
-        console.log(err);
-      }
-    });
+      });
+    }
+    else{
+      res.send("THERE IS NO NEXT SEMESTER FOR YOU TO CHOOSE AN ELECTIVE");
+    }
   });
 
 module.exports= router;
