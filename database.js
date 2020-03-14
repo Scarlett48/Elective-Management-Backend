@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 
 var mysqlConnection = mysql.createConnection({
-    host: "localhost",
+    host: "electivemanagement.eastus.cloudapp.azure.com",
     user: "root",
-    password: "password",
+    password: "Elective123!@#",
     database: "electivemanagement"
 });
 
