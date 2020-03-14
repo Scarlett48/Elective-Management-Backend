@@ -26,7 +26,7 @@ router.post("/addElectives",(req,res)=>{
 });
 
 router.post("/addOneElective",(req,res)=>{
-  mysqlConnection.query("INSERT INTO electives VALUES (\""+req.body.department+"\",\""+req.body.sem+"\",\""+req.body.course_code+"\",\""+req.body.course+"\")", (err,result)=>{
+  mysqlConnection.query("INSERT INTO electives VALUES (\""+req.body.department+"\",\""+req.body.sem+"\",\""+req.body.course_code+"\",\""+req.body.course+"\",\""+req.body.capacity+"\")" , (err,result)=>{
               
     if(!err){
       res.send(true);
