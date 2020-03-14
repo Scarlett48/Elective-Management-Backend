@@ -6,9 +6,9 @@ const saltRounds = 10;
 
 router.post("/Register",(req,res)=>{
     var name = req.body.name;
-    var rollno = req.body.rollno;
+    var rollno = req.body.rollno.toLowerCase();
     var pass = req.body.pass;
-    var sec = req.body.sec;
+    var sec = req.body.sec.toLowerCase();
     var sem = req.body.sem;
 
     bcrypt.hash(pass, saltRounds, function(err, hash) {
@@ -20,14 +20,13 @@ router.post("/Register",(req,res)=>{
             else{
                 res.send("USER ALREADY EXISTS");
                 console.log("Failed to create user login");
-                console.log(err);
             }
         });
     });
 });
 
 router.post("/Login",(req,res)=>{
-    var rollno = req.body.rollno;
+    var rollno = req.body.rollno.toLowerCase();
     var pass = req.body.pass;
 
     mysqlConnection.query("SELECT * FROM students WHERE rollno = \'"+rollno+"\'",(err,result)=>{
@@ -54,7 +53,7 @@ router.post("/Login",(req,res)=>{
 });
 
 router.post("/deleteUser",(req,res)=>{
-    var rollno = req.body.rollno;
+    var rollno = req.body.rollno.toLowerCase();
 
     mysqlConnection.query("SELECT * FROM students WHERE rollno = \'"+rollno+"\'",(err,result)=>{
         if(!err){
@@ -78,7 +77,7 @@ router.post("/deleteUser",(req,res)=>{
 
 router.post("/editPassword", (req, res)=>{
     
-    var rollno = req.body.rollno;
+    var rollno = req.body.rollno.toLowerCase();
     var oldPass = req.body.oldPass;
     var newPass = req.body.newPass;
 
