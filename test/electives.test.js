@@ -12,5 +12,5 @@ describe('POST /deleteElectives', ()=>{
             done();
         })
         .catch(done);
-    });
+    }).timeout(30000);
 })

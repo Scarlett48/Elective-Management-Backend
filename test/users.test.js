@@ -4,6 +4,7 @@ const request = require('supertest');
 const app = require('../server');
 
 describe('POST /Login', ()=>{
+    
     it('Check if all details are returned when correct login credentials are provided', (done)=>{
         request(app).post('/Login')
         .send({rollno:'CSE17250', pass:'hi'})
@@ -17,7 +18,7 @@ describe('POST /Login', ()=>{
             done();
         })
         .catch(done);
-    });
+    }).timeout(30000);
 
     it('WRONG PASSWORD returned when incorrect password is provided', (done)=>{
         request(app).post('/Login')
@@ -27,7 +28,7 @@ describe('POST /Login', ()=>{
             done();
         })
         .catch(done);
-    });
+    }).timeout(30000);
 
     it('NO SUCH ROLL NUMBER EXISTS returned when incorrect username is provided', (done)=>{
         request(app).post('/Login')
@@ -37,7 +38,7 @@ describe('POST /Login', ()=>{
             done();
         })
         .catch(done);
-    });
+    }).timeout(30000);
 
 });
 
@@ -50,7 +51,7 @@ describe('POST /Register', ()=>{
             done();
         })
         .catch(done);
-    });
+    }).timeout(30000);
 });
 
 describe('POST /deleteUser', ()=>{
@@ -62,7 +63,7 @@ describe('POST /deleteUser', ()=>{
             done();
         })
         .catch(done);
-    });
+    }).timeout(30000);
 });
 
 describe('POST /editPassword', ()=>{
@@ -74,5 +75,5 @@ describe('POST /editPassword', ()=>{
             done();
         })
         .catch(done);
-    });
+    }).timeout(30000);
 })

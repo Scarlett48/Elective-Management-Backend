@@ -44,8 +44,8 @@ router.get('/generatePDF', (req,res)=>{
                 var mailOptions = {
                     from: 'admems9876@gmail.com',
                     to: tomail,
-                    subject: 'Sending Email using Node.js',
-                    text: 'That was easy!',
+                    subject: 'Elective Allotment Report',
+                    text: 'Please find the attachment',
                     attachments: [{
                         filename: 'example.pdf',
                         path: './example.pdf',
