@@ -12,7 +12,7 @@ router.post("/Register",(req,res)=>{
     var sem = req.body.sem;
 
     bcrypt.hash(pass, saltRounds, function(err, hash) {
-        mysqlConnection.query("INSERT INTO students VALUES (\""+name+"\",\""+rollno+"\",\""+hash+"\",\""+sec+"\","+sem+")", (err,result)=>{
+        mysqlConnection.query("INSERT INTO students VALUES (\""+name+"\",\""+rollno+"\",\""+hash+"\",\""+sec+"\","+sem+",\""+rollno.substring(0,3)+"\")", (err,result)=>{
             if(!err){
                 res.send(true);
                 console.log("Created user login Successfully");
