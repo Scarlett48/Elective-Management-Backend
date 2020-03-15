@@ -42,5 +42,5 @@ app.get("/generatePDF", report);
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log(`Password generator listening on ${port}`);
+console.log(`ELECTIVE-Preference backend listening on ${port}`);
 module.exports = app;

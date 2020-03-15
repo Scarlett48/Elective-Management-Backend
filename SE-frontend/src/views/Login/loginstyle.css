@@ -1,0 +1,52 @@
+.p-4{
+    background-color: #4f4f4f;
+    color: #fff;
+    border-color: #4f4f4f;
+    border-radius: 1rem;
+}
+
+body{
+    background-color: #636363;
+}
+
+.signc{
+    color: #fff;
+    border-color: #209e91;
+    background-color: #209e91;
+    border-radius: 1rem;
+    padding-top: 4rem;
+}
+
+.btn-primary{
+    background-color: #209e91;
+    color: #fff;
+    border-color: #209e91;
+}
+
+btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #209e91;
+    border-color: #209e91;
+}
+
+.btn-primary:hover{
+    background-color: #209e91;
+}
+
+.px-0{
+    color: #b9f2a1;
+}
+
+.px-0:hover{
+    color: #fff;
+}
+
+.mt-3{
+    background-color: #4f4f4f;
+}
+
+btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #4f4f4f;
+    border-color: #4f4f4f;
+}

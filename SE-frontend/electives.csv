@@ -1,0 +1,13 @@
+sem,department,course_code,course,capacity
+3,CSE,15HUM240,Psychology For Effective Living,60
+3,ECE,15HUM240,Psychology For Effective Living,60
+3,EEE,15HUM240,Psychology For Effective Living,60
+6,CSE,15CSE336,Biometrics,60
+6,CSE,15CSE337,Cloud Computing Services,60
+6,CSE,15CSE361,Pateern Recognition,60
+7,CSE,15CSE351,Information Security,60
+7,CSE,15CS340,Computer Vision,60
+4,CSE,15CSE363,Principles Of Digital Image Processing,60
+3,CSE,15ENG230,Buisness Communication,60
+3,ECE,15ENG230,Buisness Communication,60
+3,EEE,15ENG230,Buisness Communication,60

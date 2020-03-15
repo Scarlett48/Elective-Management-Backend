@@ -1,0 +1,9 @@
+
+
+CREATE USER 'root'@'%' IDENTIFIED BY 'Elective123!@#';
+
+GRANT ALL ON *.* TO 'root'@'%';
+
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'Elective123!@#';
+
+
