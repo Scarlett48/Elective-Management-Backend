@@ -13,4 +13,16 @@ describe('POST /chooseElectivePreference', ()=>{
         })
         .catch(done);
     }).timeout(30000);
-})
+});
+
+describe('POST /changeElectivePreference', ()=>{
+    it("should return false", (done)=>{
+        request(app).post('/chooseElectivePreference')
+        .send({course_code:'15ece123'})
+        .then((res)=>{
+            expect(res.text).to.contain(false);
+            done();
+        })
+        .catch(done);
+    }).timeout(30000);
+});

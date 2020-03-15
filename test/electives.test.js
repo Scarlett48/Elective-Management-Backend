@@ -13,4 +13,26 @@ describe('POST /deleteElectives', ()=>{
         })
         .catch(done);
     }).timeout(30000);
-})
+});
+
+describe('POST /student/viewElectives', ()=>{
+    it("return NO COURSE EXISTS when electives don't exist for a particular semester", (done)=>{
+        request(app).post('/student/viewElectives')
+        .send({department:'CSE', sem:'4'})
+        .then((res)=>{
+            expect(res.text).to.contain("NO COURSE EXISTS");
+            done();
+        })
+        .catch(done);
+    }).timeout(30000);
+
+    it("return THERE IS NO NEXT SEMESTER FOR YOU TO CHOOSE AN ELECTIVE when semester is greater than 8", (done)=>{
+        request(app).post('/student/viewElectives')
+        .send({department:'CSE', sem:'9'})
+        .then((res)=>{
+            expect(res.text).to.contain("THERE IS NO NEXT SEMESTER FOR YOU TO CHOOSE AN ELECTIVE");
+            done();
+        })
+        .catch(done);
+    }).timeout(30000);
+});

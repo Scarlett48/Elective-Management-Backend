@@ -69,11 +69,21 @@ describe('POST /deleteUser', ()=>{
 describe('POST /editPassword', ()=>{
     it("if old password is wrong, return WRONG PASSWORD", (done)=>{
         request(app).post('/editPassword')
-        .send({rollno:'cse17211', oldPass:'rip123', newPass:'QWERTY1234'})
+        .send({rollno:'cse17207', oldPass:'shamzz', newPass:'QWERTY1234'})
         .then((res)=>{
             expect(res.text).to.contain('WRONG PASSWORD');
             done();
         })
         .catch(done);
     }).timeout(30000);
-})
+
+    it("return USERNAME DOESN'T EXIST", (done)=>{
+        request(app).post('/editPassword')
+        .send({rollno:'wee17260', oldPass:'shamzz', newPass:'QWERTY1234'})
+        .then((res)=>{
+            expect(res.text).to.contain("USERNAME DOESN'T EXIST");
+            done();
+        })
+        .catch(done);
+    }).timeout(30000);
+});
