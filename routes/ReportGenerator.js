@@ -62,7 +62,7 @@ router.get('/generatePDF', (req,res)=>{
                   });
 
             } else {
-                res.send("NO COURSE EXISTS");
+                res.send("COURSES HAVE NOT BEEN ALLOCATED YET");
             }
         } else {
         res.send(false);

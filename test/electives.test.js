@@ -3,6 +3,18 @@ const expect = require('chai').expect;
 const request = require('supertest');
 const app = require('../server');
 
+describe('POST /addOneElective', ()=>{
+    it("return false when request body parameters are missing", (done)=>{
+        request(app).post('/addOneElective')
+        .send({department:'cse', course_code:'12CSE401'})
+        .then((res)=>{
+            expect(res.text).to.contain(false);
+            done();
+        })
+        .catch(done);
+    }).timeout(30000);
+});
+
 describe('POST /deleteElectives', ()=>{
     it("return NO SUCH COURSE EXISTS when a course that doesn't exist in DB is deleted", (done)=>{
         request(app).post('/deleteElectives')
