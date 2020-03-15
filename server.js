@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');  
+const path = require('path');
 var cors = require('cors');  //to allow both client and server to exist in the same system
 var app = express();
 app.use(express.static(path.join(__dirname, 'SE-frontend/build')));
@@ -17,6 +18,7 @@ const chooseElectivePreference = require('./routes/PreferenceList');
 const changeElectivePreference = require('./routes/PreferenceList');
 const editPass = require('./routes/Users');
 const report = require('./routes/ReportGenerator');
+
 
 app.use(bodyParser.json());
 app.use(cors());
