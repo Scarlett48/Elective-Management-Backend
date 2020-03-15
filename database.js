@@ -15,7 +15,7 @@ mysqlConnection.connect((err)=>{
             console.log(err);
         });
 
-        mysqlConnection.query("CREATE TABLE IF NOT EXISTS students (name VARCHAR(50) NOT NULL, rollno VARCHAR(30) PRIMARY KEY, password VARCHAR(100) NOT NULL, section VARCHAR(1) NOT NULL, semester int NOT NULL)",(err,result,fields)=>{
+        mysqlConnection.query("CREATE TABLE IF NOT EXISTS students (name VARCHAR(50) NOT NULL, rollno VARCHAR(30) PRIMARY KEY, password VARCHAR(100) NOT NULL, section VARCHAR(1) NOT NULL, semester int NOT NULL, department VARCHAR(30) NOT NULL)",(err,result,fields)=>{
             if(err)
             console.log(err);
         });

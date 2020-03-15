@@ -7,7 +7,7 @@ router.post("/addElectives",(req,res)=>{
 
   var arr =[]
   for(var i=0; i<count-1; i++){
-    arr.push([req.body.data.data[i].department,req.body.data.data[i].sem,req.body.data.data[i].course_code, req.body.data.data[i].course, req.body.data.data[i].capacity]);
+    arr.push([req.body.data.data[i].department,req.body.data.data[i].sem,req.body.data.data[i].course_code.toLowerCase(), req.body.data.data[i].course.toLowerCase(), req.body.data.data[i].capacity]);
     
   }
   
