@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');  
 var cors = require('cors');  //to allow both client and server to exist in the same system
 var app = express();
+app.use(express.static(path.join(__dirname, 'SE-frontend/build')));
 
 const mysqlConnection = require('./database');
 const addElective = require('./routes/Electives');
@@ -19,7 +20,9 @@ const report = require('./routes/ReportGenerator');
 
 app.use(bodyParser.json());
 app.use(cors());
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/SE-frontend/build/index.html'));
+});
 //ROUTES
 app.post("/Register",register);
 app.post("/Login",login);
@@ -34,6 +37,8 @@ app.post("/changeElectivePreference",changeElectivePreference)
 app.post("/editPassword",editPass);
 app.get("/generatePDF", report);
 
-app.listen(3001);
+const port = process.env.PORT || 5000;
+app.listen(port);
 
+console.log(`Password generator listening on ${port}`);
 module.exports = app;
