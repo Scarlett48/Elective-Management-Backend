@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mysqlConnection = require("../database");
 var nodemailer = require('nodemailer');
-'use strict';
+// 'use strict';
 const fs = require('fs');
 const PDFDocument = require('./pdfGenerator');
 const doc = new PDFDocument();

@@ -1,5 +1,4 @@
-'use strict';
-
+// 'use strict';
 const PDFDocument = require('pdfkit');
 
 class PDFDocumentWithTables extends PDFDocument {
