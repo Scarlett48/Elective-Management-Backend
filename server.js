@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');  
+const path = require('path');
 var cors = require('cors');  //to allow both client and server to exist in the same system
 var app = express();
+
 
 const mysqlConnection = require('./database');
 const addElective = require('./routes/Electives');
@@ -33,7 +35,8 @@ app.post("/chooseElectivePreference",chooseElectivePreference);
 app.post("/changeElectivePreference",changeElectivePreference)
 app.post("/editPassword",editPass);
 app.get("/generatePDF", report);
+const port = process.env.PORT || 5000;
+app.listen(port);
 
-app.listen(3001);
-
+console.log(`ELECTIVE-Preference backend listening on ${port}`);
 module.exports = app;
