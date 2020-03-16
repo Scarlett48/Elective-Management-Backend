@@ -18,6 +18,7 @@ const chooseElectivePreference = require('./routes/PreferenceList');
 const changeElectivePreference = require('./routes/PreferenceList');
 const editPass = require('./routes/Users');
 const report = require('./routes/ReportGenerator');
+const fcfs = require('./routes/PreferenceList');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -35,6 +36,7 @@ app.post("/chooseElectivePreference",chooseElectivePreference);
 app.post("/changeElectivePreference",changeElectivePreference)
 app.post("/editPassword",editPass);
 app.get("/generatePDF", report);
+app.post("/fcfs",fcfs);
 const port = process.env.PORT || 5000;
 app.listen(port);
 
