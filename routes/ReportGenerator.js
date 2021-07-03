@@ -12,8 +12,8 @@ var arr =[];
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'admems9876@gmail.com',
-      pass: 'hello@123'
+      user: ,
+      pass: 
     }
   });
 
