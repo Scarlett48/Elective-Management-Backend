@@ -26,6 +26,6 @@
     "nodemon": "^2.0.2",
     "request": "^2.88.2",
     "supertest": "^4.0.2",
-    "minimist": ">=0.2.1"
+    "minimist": ">=1.2.6"
   }
 }
